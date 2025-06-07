@@ -3,7 +3,7 @@ SHELL := /bin/bash
 default: test
 
 test:
-	./shell/test.sh
+	./shell/test
 
 test-coverage:
 	mvn clean org.jacoco:jacoco-maven-plugin:0.8.13:prepare-agent verify org.jacoco:jacoco-maven-plugin:0.8.13:report

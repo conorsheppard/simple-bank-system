@@ -1,5 +1,6 @@
-package com.conorsheppard;
+package com.conorsheppard.simple_bank;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,16 +11,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BankTest {
 
+    @DisplayName("Bank deposit test cases")
     @ParameterizedTest(name = "{index}: {0}")
     @MethodSource("depositCases")
-    void testDeposit(String name, Bank bank, int account, long amount, boolean expected) {
+    void testDeposit(String name, Bank bank, int account, long amount, boolean expected, long expectBalance) {
         assertEquals(expected, bank.deposit(account, amount));
+        assertEquals(expectBalance, bank.getBalance(account));
     }
 
     static Stream<Arguments> depositCases() {
         return Stream.of(
-                Arguments.of("Valid deposit into account 1", new Bank(new long[]{100, 200, 300}), 1, 50, true),
-                Arguments.of("Invalid deposit into non-existent account 4", new Bank(new long[]{100, 200, 300}), 4, 100, false)
+                Arguments.of("Valid deposit into account 1", new Bank(new long[]{100, 200, 300}), 1, 50, true, 150L),
+                Arguments.of("Invalid deposit into non-existent account 4", new Bank(new long[]{100, 200, 300}), 4, 100, false, -1)
         );
     }
 

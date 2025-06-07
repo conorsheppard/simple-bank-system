@@ -1,4 +1,4 @@
-package com.conorsheppard;
+package com.conorsheppard.simple_bank;
 
 import java.util.Arrays;
 
@@ -28,6 +28,11 @@ class Bank {
         if (!hasSufficientFunds(account, money)) return false;
         debitAccount(account, money);
         return true;
+    }
+
+    public long getBalance(int account) {
+        if (!isValidAccount(account)) return -1;
+        return accounts[account - 1];
     }
 
     private void creditAccount(int account, long amount) {
